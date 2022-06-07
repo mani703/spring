@@ -1,4 +1,4 @@
-package com.bit.sts04;
+package com.bit.spring01;
 
 import java.text.DateFormat;
 import java.util.Date;

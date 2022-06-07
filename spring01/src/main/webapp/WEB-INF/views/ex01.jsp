@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>ex01 page</h1>
-	<p>${msg }
+	<p>${msg }</p>
+	<img alt="" src="imgs/logo.jpg" />
 </body>
 </html>

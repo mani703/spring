@@ -25,41 +25,16 @@
 		class="org.springframework.jdbc.core.JdbcTemplate"
 		p:dataSource-ref="dataSource" />
 	
-	<bean id="myModule" class="com.bit.spring02.service.MyModuleImpl"></bean>
+	<bean id="autoLogging" class="com.bit.spring02.utils.AutoLogging"/>
 	
-	<bean id="userAfter" class="com.bit.spring02.utils.UserAfter"></bean>
-	<bean id="userAround" class="com.bit.spring02.utils.UserAround"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.bit.spring02.model.EmpDao.*(..))" id="beforelog"/>
+		<aop:aspect ref="autoLogging">
+			<aop:before method="beforeAop" pointcut-ref="beforelog"/>
+		</aop:aspect>
+	</aop:config>
 	
-	<!--	
-	 <aop:config>
-	<bean id="userBefore" class="com.bit.spring02.utils.UserBefore"></bean>
-		<aop:pointcut expression="execution(* com.bit.spring02.service.MyModule.*(..))" id="modulePointCut"/>	
-		<aop:aspect ref="userBefore">
-			<aop:before method="beforeTargetMethod" pointcut-ref="modulePointCut"/>
-		</aop:aspect> 
-		
-		<aop:aspect ref="userAfter">
-			<aop:after method="afterTargetMethod" pointcut-ref="modulePointCut"/>
-		</aop:aspect> 
-		
-		<aop:aspect ref="userAfter">
-			<aop:after-returning 
-				method="afterReturningTargetMethod" 
-				pointcut-ref="modulePointCut"
-				returning="result"/>
-		</aop:aspect>
-		<aop:aspect ref="userAfter">
-			<aop:after-throwing 
-				method="afterThrowingTargetMethod"
-				pointcut-ref="modulePointCut"
-				throwing="exp"/>
-		</aop:aspect>
-		<aop:aspect ref="userAround">
-			<aop:around method="aroundTargetMethod" pointcut-ref="modulePointCut"/>
-		</aop:aspect>
-		
-	</aop:config> 
-		-->
+	<context:component-scan base-package="com.bit.spring02" />
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>

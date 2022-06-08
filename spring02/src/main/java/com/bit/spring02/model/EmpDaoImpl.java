@@ -28,6 +28,10 @@ public class EmpDaoImpl implements EmpDao<EmpVo> {
 		}
 		
 	};
+	
+	public EmpDaoImpl() {
+		System.out.println("dao create...");
+	}
 
 	@Override
 	public List<EmpVo> findAll() throws SQLException {
@@ -41,8 +45,9 @@ public class EmpDaoImpl implements EmpDao<EmpVo> {
 	}
 
 	@Override
-	public void insertOne(EmpVo t) throws SQLException {
-		
+	public void insertOne(EmpVo bean) throws SQLException {
+		String sql = "insert into emp (ename, sal, job, empno, hiredate) values (?, ?, ?, ?, now())";
+		jdbcTemplate.update(sql, bean.getEname(), bean.getSal(), bean.getJob(), bean.getEmpno());
 	}
 
 	@Override

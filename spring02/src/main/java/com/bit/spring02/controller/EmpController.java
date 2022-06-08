@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bit.spring02.model.EmpVo;
-import com.bit.spring02.service.EmpServiceImpl;
+import com.bit.spring02.service.EmpService;
 
 @Controller
 @RequestMapping("/emp")
 public class EmpController {
 	
 	@Autowired
-	EmpServiceImpl empService;
+	EmpService empService;
 
 	@RequestMapping("/")
 	public String list(Model model) throws SQLException {

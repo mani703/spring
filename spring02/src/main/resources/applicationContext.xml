@@ -4,37 +4,55 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
-	<bean 
-		id="dataSource" 
-		class="org.apache.commons.dbcp.BasicDataSource" 
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="com.mysql.cj.jdbc.Driver"
-		p:url="jdbc:mysql://localhost:3306/scott"
-		p:username="user01"
-		p:password="1234" 
-		p:maxActive="3"
-		p:maxIdle="5"
-		p:minIdle="1"
-		p:maxWait="3000"/>
-	
-	<bean 
-		id="jdbcTemplate" 
+		p:url="jdbc:mysql://localhost:3306/scott" p:username="user01"
+		p:password="1234" p:maxActive="3" p:maxIdle="5" p:minIdle="1"
+		p:maxWait="3000" />
+
+	<bean id="jdbcTemplate"
 		class="org.springframework.jdbc.core.JdbcTemplate"
 		p:dataSource-ref="dataSource" />
-	
-	<bean id="autoLogging" class="com.bit.spring02.utils.AutoLogging"/>
-	
+
+	<bean id="autoLogging" class="com.bit.spring02.utils.AutoLogging" />
 	<aop:config>
-		<aop:pointcut expression="execution(* com.bit.spring02.model.EmpDao.*(..))" id="beforelog"/>
+		<aop:pointcut
+			expression="execution(* com.bit.spring02.model.EmpDao.*(..))"
+			id="beforelog" />
 		<aop:aspect ref="autoLogging">
-			<aop:before method="beforeAop" pointcut-ref="beforelog"/>
+			<aop:before method="beforeAop" pointcut-ref="beforelog" />
 		</aop:aspect>
 	</aop:config>
 	
-	<context:component-scan base-package="com.bit.spring02" />
+	<context:component-scan base-package="com.bit.spring02.model" />
+		
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+<!-- 
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="requiredTx"
+			expression="execution(* com.bit.spring02.service.EmpService.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="requiredTx" />
+	</aop:config>
+ -->
+	<context:component-scan base-package="com.bit.spring02.service" />
 	
+	<tx:annotation-driven transaction-manager="txManager"/>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>

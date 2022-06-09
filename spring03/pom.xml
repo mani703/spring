@@ -161,8 +161,16 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.24</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
+		<dependency>
+		    <groupId>org.webjars.bower</groupId>
+		    <artifactId>jquery</artifactId>
+		    <version>1.12.4</version>
+		</dependency>
+		
 		     
 	</dependencies>
+	
     <build>
     	<finalName>spring03</finalName>
         <plugins>

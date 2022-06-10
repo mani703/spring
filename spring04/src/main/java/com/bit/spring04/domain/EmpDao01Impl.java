@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class EmpDao01Impl implements EmpDao {
 	
 	@Autowired
@@ -35,12 +37,14 @@ public class EmpDao01Impl implements EmpDao {
 
 	@Override
 	public EmpVo findOne(int idx) throws SQLException {
-		return null;
+		String sql = "select * from emp where empno=?";
+		return jdbcTemplate.queryForObject(sql, mapper, idx);
 	}
 
 	@Override
 	public void insertOne(EmpVo bean) throws SQLException {
-		
+		String sql = "insert into emp (ename, sal, job, empno, hiredate) values (?, ?, ?, ?, now())";
+		jdbcTemplate.update(sql, bean.getEname(), bean.getSal(), bean.getJob(), bean.getEmpno());
 	}
 
 	@Override

@@ -3,6 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper>
+  <mapper namespace="emp">
   
+  	<select id="findAll" resultType="com.bit.spring05.domain.Emp">
+  		select * from emp
+  	</select>
+  	
+  	<select id="findOne" resultType="com.bit.spring05.domain.Emp" parameterType="int">
+  		select * from emp where empno=#{value}
+  	</select>
+  	
+  	<insert id="insertOne" parameterType="com.bit.spring05.domain.Emp">
+  		insert into emp (empno, ename, sal, job, hiredate) values (#{empno}, #{ename}, #{sal}, #{job}, now())
+  	</insert>
+  	
   </mapper>

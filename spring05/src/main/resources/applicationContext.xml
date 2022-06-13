@@ -12,7 +12,7 @@
 
 	<bean 
 		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"
-		p:location="userInfo.properties"/>
+		p:location="classpath:/userInfo.properties"/>
 
 	<bean 
 		id="dataSource" 

@@ -24,25 +24,28 @@
     <a class="navbar-brand" href="#">Navbar</a>
   </div>
   <p class="navbar-text">
-  	<a href="./">HOME</a>
-  	<a href="./emp/">EMP</a>
-  	<a href="./emp/add">EMP_Add</a>
-  	<c:if test="${sessionScope.result eq true}">
-  		<a href="./logout/">LOGOUT</a>
-  	</c:if>
-  	<c:if test="${sessionScope.result eq null}">
-  		<a href="./login/">LOGIN</a>
-  	</c:if>
+  	<a href="../">HOME</a>
+  	<a href="../emp/">EMP</a>
+  	<a href="../emp/add">EMP_Add</a>
+  	<a href="../login/">LOGIN</a>
   </p>
-  <c:if test="${sessionScope.result }">
-  	<p class="navbar-text">${sessionScope.user }님 로그인 중...</p>
-  </c:if>
 </nav>
 
-<h1>
-	Hello world!  
-</h1>
+<div class="container">
+	<form action="./" method="post">
+	  <div class="mb-3">
+	    <label for="empno" class="form-label">empno</label>
+	    <input type="text" class="form-control" id="empno" name="empno" value="${bean.empno }">
+	  </div>
+	  <div class="mb-3">
+	    <label for="ename" class="form-label">ename</label>
+	    <input type="text" class="form-control" id="ename" name="ename" value="${bean.ename }">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Login</button>
+	  <button type="reset" class="btn btn-default">Reset</button>
+	  <button type="button" class="btn btn-default" onclick="history.back();">Back</button>
+	</form>
+</div>
 
-<P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

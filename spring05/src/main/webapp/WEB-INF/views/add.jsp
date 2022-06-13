@@ -24,14 +24,14 @@
     <a class="navbar-brand" href="#">Navbar</a>
   </div>
   <p class="navbar-text">
-  	<a href="./">HOME</a>
-  	<a href="./emp/">EMP</a>
-  	<a href="./emp/add">EMP_Add</a>
+  	<a href="../">HOME</a>
+  	<a href="./">EMP</a>
+  	<a href="./add">EMP_Add</a>
   	<c:if test="${sessionScope.result eq true}">
-  		<a href="./logout/">LOGOUT</a>
+  		<a href="../logout/">LOGOUT</a>
   	</c:if>
   	<c:if test="${sessionScope.result eq null}">
-  		<a href="./login/">LOGIN</a>
+  		<a href="../login/">LOGIN</a>
   	</c:if>
   </p>
   <c:if test="${sessionScope.result }">
@@ -39,10 +39,30 @@
   </c:if>
 </nav>
 
-<h1>
-	Hello world!  
-</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<div class="container">
+	<form action="./" method="post">
+	  <div class="mb-3">
+	    <label for="empno" class="form-label">empno</label>
+	    <input type="text" class="form-control" id="empno" name="empno" value="${bean.empno }">
+	  </div>
+	  <div class="mb-3">
+	    <label for="ename" class="form-label">ename</label>
+	    <input type="text" class="form-control" id="ename" name="ename" value="${bean.ename }">
+	  </div>
+	  <div class="mb-3">
+	    <label for="sal" class="form-label">sal</label>
+	    <input type="text" class="form-control" id="sal" name="sal" value="${bean.sal }">
+	  </div>
+	  <div class="mb-3">
+	    <label for="job" class="form-label">job</label>
+	    <input type="text" class="form-control" id="job" name="job" value="${bean.job }">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	  <button type="reset" class="btn btn-default">Reset</button>
+	  <button type="button" class="btn btn-default" onclick="history.back();">Back</button>
+	</form>
+</div>
+
 </body>
 </html>

@@ -72,7 +72,7 @@ public class ApiController {
 			e.printStackTrace();
 		}
 		if(result==0) 
-			throw new IllegalArgumentException("ìˆ˜ì •ì•ˆë¨");
+			throw new IllegalArgumentException("?ˆ˜? •?•ˆ?¨");
 	}
 }
 

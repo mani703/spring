@@ -14,12 +14,16 @@ import com.bit.spring08.model.DeptDao;
 @Controller
 public class HomeController {
 	
+//	@Autowired
+//	SqlSession sqlSession;
+	
 	@Autowired
-	SqlSession sqlSession;
+	DeptDao deptDao;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) throws SQLException {
-		model.addAttribute("list", sqlSession.getMapper(DeptDao.class).findAll());
+//		model.addAttribute("list", sqlSession.getMapper(DeptDao.class).findAll());
+		model.addAttribute("list", deptDao.findAll());
 		return "home";
 	}
 	

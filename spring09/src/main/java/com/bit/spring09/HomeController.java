@@ -23,7 +23,9 @@ public class HomeController {
 	
 	@GetMapping("/{idx}")
 	public String emp(Model model, @PathVariable int idx) {
-		empService.selectOne(model, idx);
-		return "detail";
+//		empService.selectOne(model, idx);
+		empService.delete(idx);
+//		return "detail";
+		return "redirect:./";
 	}
 }

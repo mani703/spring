@@ -16,7 +16,7 @@ public class RootController {
 	
 	@GetMapping("/ex01")
 	public String ex01(Model model) {
-		model.addAttribute("msg", "환영합니다.");
+		model.addAttribute("msg", "환영합니다");
 		return "ex01";
 	}
 }

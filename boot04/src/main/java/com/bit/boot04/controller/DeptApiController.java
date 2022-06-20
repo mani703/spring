@@ -64,7 +64,8 @@ public class DeptApiController {
 	@DeleteMapping("/dept/{deptno}")
 	public ResponseEntity<?> deleteDept(@PathVariable int deptno){
 		return ResponseEntity.status(
-					restService.deleteOne(deptno) > 0 ? HttpStatus.OK : HttpStatus.BAD_REQUEST
+				restService.deleteOne(deptno) > 0 ? HttpStatus.OK : HttpStatus.BAD_REQUEST
 				).build();
 	}
+
 }

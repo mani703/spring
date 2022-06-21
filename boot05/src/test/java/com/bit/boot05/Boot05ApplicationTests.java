@@ -1,10 +1,10 @@
-package com.bit.boot04;
+package com.bit.boot05;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Boot04ApplicationTests {
+class Boot05ApplicationTests {
 
 	@Test
 	void contextLoads() {

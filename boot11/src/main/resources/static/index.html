@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+	<h1>stomp활용</h1>
+	<form>
+		<label>메시지</label>
+		<input type="text" id="content">
+		<button>전송</button>
+	</form>
+	<div id="target"></div>
+	<script type="text/javascript">
+		var sock = new SockJS("/echo");
+		var client = Stomp.over(sock);
+		client.connect({}, function(){
+			client.subscribe('/topic/msg1', function(e) {
+				$("<div/>").appendTo('#target').text(e.body);
+			});
+		});
+		$('form').submit(function() {
+			client.send('/room1', {}, $('#content').val());
+			return false;
+		});
+	</script>
+</body>
+</html>

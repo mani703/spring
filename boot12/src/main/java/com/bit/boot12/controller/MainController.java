@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-	
-	@Autowired
-	PasswordEncoder passwordEncoder;
 
 	@RequestMapping("/home")
 	public String page1() {

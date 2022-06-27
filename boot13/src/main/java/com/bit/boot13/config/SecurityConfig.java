@@ -1,4 +1,4 @@
-package com.bit.boot13.controller;
+package com.bit.boot13.config;
 
 import javax.sql.DataSource;
 
@@ -16,16 +16,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	DataSource dataSource;
+	UserDetailService userDetailService;
+	
+//	@Autowired
+//	DataSource dataSource;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests().antMatchers("/", "/login", "/logout").permitAll();
 //		http.authorizeHttpRequests().antMatchers("/hello").authenticated();
 //		http.authorizeHttpRequests().antMatchers("/api/emp/**").authenticated();
-//		http.authorizeHttpRequests().anyRequest().authenticated();
-		http.authorizeHttpRequests().anyRequest().hasAnyRole("ADMIN", "USER");
+		http.authorizeHttpRequests().anyRequest().authenticated();
+//		http.authorizeHttpRequests().anyRequest().hasAnyRole("ADMIN", "USER");
 		http.formLogin().loginPage("/login");
+		http.userDetailsService(userDetailService);
 	}
 	
 //	@Override
@@ -39,13 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-			.jdbcAuthentication()
-			.dataSource(dataSource)
-			.usersByUsernameQuery("select username, password, enabled from users where username=?")
-			.authoritiesByUsernameQuery("select username, authority from authorities where username=?");
-	}
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		auth
+//			.jdbcAuthentication()
+//			.dataSource(dataSource)
+//			.usersByUsernameQuery("select username, password, enabled from users where username=?")
+//			.authoritiesByUsernameQuery("select username, authority from authorities where username=?");
+//	}
 
 }
